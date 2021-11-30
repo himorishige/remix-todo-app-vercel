@@ -8,7 +8,7 @@ import {
   useCatch,
 } from 'remix';
 import type { LinksFunction } from 'remix';
-import styles from './styles/app.css';
+import styles from '~/styles/app.css';
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: styles }];
@@ -44,7 +44,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
 }
 
 export function CatchBoundary() {
-  let caught = useCatch();
+  const caught = useCatch();
 
   let message;
   switch (caught.status) {
