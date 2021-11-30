@@ -7,6 +7,12 @@ import {
   ScrollRestoration,
   useCatch,
 } from 'remix';
+import type { LinksFunction } from 'remix';
+import styles from './styles/app.css';
+
+export const links: LinksFunction = () => {
+  return [{ rel: 'stylesheet', href: styles }];
+};
 
 export default function App() {
   return (
