@@ -1,43 +1,16 @@
-import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix';
-import { supabase } from '~/lib/supabaseClient';
-import type { Item } from '~/types';
+import { LoaderFunction, useLoaderData } from 'remix';
 
-export let meta: MetaFunction = () => {
-  return {
-    title: 'Remix Starter',
-    description: 'Welcome to remix!',
-  };
-};
-
-// loaderとしてexportした返り値がコンポーネントに渡される
 export const loader: LoaderFunction = async () => {
-  const { data, error } = await supabase
-    .from<Item>('todo')
-    .select('*')
-    .order('id');
-  if (error) {
-    // json()をthrowするとステータスコードやメッセージをコントロールできる
-    throw json(error.message, { status: 500 });
-  }
-  return data ?? [];
+  return new Date().toString();
 };
 
 export default function Index() {
-  // useLoaderDataでloaderの値を取得する
-  const data = useLoaderData<Item[]>();
-
-  if (!data.length)
-    return <div className="p-4">登録されたタスクはありません。</div>;
+  const data = useLoaderData<string>();
 
   return (
-    <div className="p-4">
-      <ul>
-        {data.map((item) => (
-          <li key={item.id}>
-            {item.title} {item.created_at}
-          </li>
-        ))}
-      </ul>
+    <div className="p-8">
+      <h1>ssr</h1>
+      <p>{data}</p>
     </div>
   );
 }
