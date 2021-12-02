@@ -12,7 +12,7 @@ export const headers: HeadersFunction = () => {
 };
 
 export const loader: LoaderFunction = () => {
-  return new Date().toString();
+  return new Date().toUTCString();
 };
 
 export default function Index() {
@@ -22,6 +22,8 @@ export default function Index() {
     <div className="p-8">
       <h1>swr</h1>
       <p>{data}</p>
+      <h1>browser</h1>
+      <p>{new Date().toUTCString()}</p>
     </div>
   );
 }
